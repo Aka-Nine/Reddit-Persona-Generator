@@ -51,7 +51,7 @@ reddit-persona-generator/
 │   ├── text_utils.py        # 🔡 Text cleaning, keywords, readability
 │   └── validation.py
 │
-├── viewer_app.py            # 🌐 Streamlit viewer (optional)
+├── visualizer.py            # 🌐 Streamlit viewer (optional)
 └── README.md                # 📘 This file
 ```
 
@@ -102,7 +102,7 @@ python main.py https://www.reddit.com/user/spez
 ## 🌐 Optional: Launch Viewer
 
 ```
-streamlit run viewer_app.py
+streamlit run visualizer.py
 
 ```
 
