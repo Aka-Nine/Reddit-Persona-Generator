@@ -1,0 +1,100 @@
+
+PERSONA_TEMPLATE = """
+USER PERSONA ANALYSIS
+=====================
+
+Username: spez
+Generated: ${datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+
+ANALYSIS SUMMARY
+================
+Analysis Summary for Unknown User:
+        
+        Account Age: 7342.701515669166 days
+        Activity Level: 10 posts, 59 comments
+        Primary Interest: technology
+        Engagement: Average sentiment 0.82
+        Top Communities: ModSupport, modnews, Snoo
+        
+        This analysis is based on publicly available Reddit activity and should be considered
+        an approximation of user characteristics rather than definitive personality assessment.
+
+DEMOGRAPHICS
+============
+age_range: 30-40
+age_confidence: 0.6
+likely_gender: male
+gender_confidence: 0.4
+likely_location: United States
+location_confidence: 0.3
+occupation_category: tech industry or online community management
+occupation_confidence: 0.5
+education_level: bachelor's degree or higher
+education_confidence: 0.4
+relationship_status: unknown
+status_confidence: 0.1
+
+PERSONALITY TRAITS
+==================
+big_five: {'openness': 0.65, 'conscientiousness': 0.58, 'extraversion': 0.42, 'agreeableness': 0.75, 'neuroticism': 0.38}
+communication_style: The user tends to be informative, detailed, and slightly formal in their writing style, indicating a preference for clear and structured communication.
+social_tendencies: Introverted tendencies, with a preference for online interactions and a relatively low post-to-comment ratio, suggesting a more reserved and reflective approach to social engagement.
+decision_making: Thinking preference, as evidenced by the user's analytical and detail-oriented writing style, as well as their interest in technology and politics, which often require logical and objective evaluation.
+information_processing: Intuition preference, as the user's writing style and topic interests suggest a focus on abstract concepts, patterns, and connections, rather than concrete facts and details.
+lifestyle_approach: Judging preference, as the user's activity patterns and posting frequency indicate a sense of structure and routine, as well as a desire for organization and planning.
+key_traits: ['analytical', 'informed', 'helpful', 'structured', 'reserved']
+archetype: The Informant
+
+MOTIVATIONS
+===========
+primary_motivations: ['knowledge_sharing', 'community_building', 'entertainment']
+convenience_importance: 0.7
+social_connection: 0.85
+knowledge_sharing: 0.95
+entertainment: 0.75
+self_expression: 0.55
+community_belonging: 0.85
+achievement_recognition: 0.45
+motivational_quote: Empowering others through knowledge and community
+
+BEHAVIORS & HABITS
+==================
+posting_habits: ['infrequent_posting', 'prefers_comments_over_posts']
+content_preferences: ['official_reddit_business', 'moderator_support']
+interaction_style: official and informative
+time_patterns: most active during early morning hours
+platform_usage: primarily uses Reddit for official Reddit business and moderator support
+engagement_behavior: provides informative responses
+routine_indicators: ['daily_check_ins', 'early_morning_updates']
+
+FRUSTRATIONS
+============
+main_frustrations: ['self_deprecation', 'information_overload']
+technology_frustrations: []
+social_frustrations: ['negative_interactions']
+platform_frustrations: ['unclear_purpose_of_new_features']
+time_management_issues: []
+information_overload: True
+engagement_disappointment: True
+
+GOALS & NEEDS
+=============
+primary_goals: ['stay_informed', 'help_others', 'learn_new_skills']
+information_needs: ['industry_news', 'technical_tutorials', 'best_practices']
+social_needs: ['peer_discussion', 'expert_validation', 'mentorship']
+entertainment_needs: ['interesting_content', 'community_events']
+learning_objectives: ['skill_development', 'career_advancement']
+community_goals: ['contribute_knowledge', 'build_reputation']
+personal_development: ['communication_skills', 'expertise']
+long_term_aspirations: ['become_expert', 'build_influence']
+
+CITATIONS
+=========
+Post: https://reddit.com/r/Snoo/comments/1lq0zjs/best_snoo_i_could_do/
+Post: https://reddit.com/r/u_spez/comments/1kfciml/reddits_next_chapter_smarter_easier_still_human/
+Post: https://reddit.com/r/modnews/comments/ipiung/today_were_testing_a_new_way_to_discuss_political/
+Comment: https://reddit.com/r/Snoo/comments/1ll8ago/snoo_first_try/mzyss3f/
+Comment: https://reddit.com/r/Snoo/comments/1ljn3d7/snoo_found_you/mzqqmaw/
+Comment: https://reddit.com/r/Snoo/comments/1lixlvp/snoo_recalling_and_celebrating_its_20_years/mzk0y62/
+
+Confidence Score: 1.0

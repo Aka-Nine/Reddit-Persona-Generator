@@ -25,8 +25,7 @@ __pycache__/
 .vscode/
 
 # Output folders
-output/
-*.log
+
 persona_generator.log
 
 # Streamlit cache (optional)

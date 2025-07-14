@@ -1,0 +1,100 @@
+
+PERSONA_TEMPLATE = """
+USER PERSONA ANALYSIS
+=====================
+
+Username: kojied
+Generated: ${datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+
+ANALYSIS SUMMARY
+================
+Analysis Summary for Unknown User:
+        
+        Account Age: 2018.99949153795 days
+        Activity Level: 31 posts, 195 comments
+        Primary Interest: technology
+        Engagement: Average sentiment 0.15
+        Top Communities: VisionPro, civ5, AskReddit
+        
+        This analysis is based on publicly available Reddit activity and should be considered
+        an approximation of user characteristics rather than definitive personality assessment.
+
+DEMOGRAPHICS
+============
+age_range: 25-35
+age_confidence: 0.6
+likely_gender: male
+gender_confidence: 0.4
+likely_location: New York City, USA
+location_confidence: 0.5
+occupation_category: tech industry/IT
+occupation_confidence: 0.5
+education_level: bachelor's degree
+education_confidence: 0.4
+relationship_status: single
+status_confidence: 0.3
+
+PERSONALITY TRAITS
+==================
+big_five: {'openness': 0.65, 'conscientiousness': 0.55, 'extraversion': 0.45, 'agreeableness': 0.75, 'neuroticism': 0.35}
+communication_style: Inquisitive and informative, with a tendency to ask questions and provide detailed explanations.
+social_tendencies: Introverted, with a preference for online interactions and a smaller social circle.
+decision_making: Thinking-oriented, with a focus on logical analysis and objective decision-making.
+information_processing: Intuitive, with a preference for exploring abstract ideas and possibilities.
+lifestyle_approach: Perceiving, with a flexible and adaptable approach to planning and organization.
+key_traits: ['inquisitive', 'analytical', 'helpful', 'tech-savvy']
+archetype: The Investigator
+
+MOTIVATIONS
+===========
+primary_motivations: ['knowledge_sharing', 'community_building', 'entertainment']
+convenience_importance: 0.4
+social_connection: 0.7
+knowledge_sharing: 0.85
+entertainment: 0.65
+self_expression: 0.45
+community_belonging: 0.75
+achievement_recognition: 0.35
+motivational_quote: Empowering others through shared knowledge and experiences
+
+BEHAVIORS & HABITS
+==================
+posting_habits: ['infrequent_posting', 'occasional_contributor']
+content_preferences: ['gaming_communities', 'informational_discussions']
+interaction_style: inquisitive and enthusiastic
+time_patterns: most active during evening hours
+platform_usage: primarily uses Reddit for socializing and entertainment
+engagement_behavior: asks questions and seeks opinions
+routine_indicators: ['peak_activity_at_9pm', 'shorter_posts_during_weekdays']
+
+FRUSTRATIONS
+============
+main_frustrations: ['feeling_violated', 'frustration_with_exploitation_narrative']
+technology_frustrations: []
+social_frustrations: ['toxic_comments', 'lack_of_constructive_discussion']
+platform_frustrations: []
+time_management_issues: []
+information_overload: False
+engagement_disappointment: True
+
+GOALS & NEEDS
+=============
+primary_goals: ['stay_informed', 'help_others', 'learn_new_skills']
+information_needs: ['industry_news', 'technical_tutorials', 'best_practices']
+social_needs: ['peer_discussion', 'expert_validation', 'mentorship']
+entertainment_needs: ['interesting_content', 'community_events']
+learning_objectives: ['skill_development', 'hobby_improvement']
+community_goals: ['contribute_knowledge', 'build_reputation']
+personal_development: ['expertise', 'communication_skills']
+long_term_aspirations: ['become_expert', 'create_impact']
+
+CITATIONS
+=========
+Post: https://reddit.com/r/newyorkcity/comments/1lykkqf/i_feel_violated_by_intern_season/
+Post: https://reddit.com/r/AskReddit/comments/1hnx8j0/h1b_holders_what_are_your_thoughts_on_the/
+Post: https://reddit.com/r/AskReddit/comments/1hnx7lj/h1b_holders_do_you_feel_exploited_or_see_it_as_an/
+Comment: https://reddit.com/r/ManorLords/comments/1ly3nuf/my_granary_burned_down/n2r16t2/
+Comment: https://reddit.com/r/ManorLords/comments/1lwfdh8/anyone_else_having_an_issue_where_their_trading/n2dn0vm/
+Comment: https://reddit.com/r/ChatGPT/comments/1lvtwj3/i_used_ai_to_create_this_short_film_on_human/n2b07h0/
+
+Confidence Score: 1.0

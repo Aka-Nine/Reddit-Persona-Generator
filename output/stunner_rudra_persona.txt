@@ -1,0 +1,100 @@
+
+PERSONA_TEMPLATE = """
+USER PERSONA ANALYSIS
+=====================
+
+Username: stunner_rudra
+Generated: ${datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+
+ANALYSIS SUMMARY
+================
+Analysis Summary for Unknown User:
+        
+        Account Age: 1615.9348825037976 days
+        Activity Level: 3 posts, 106 comments
+        Primary Interest: technology
+        Engagement: Average sentiment 0.70
+        Top Communities: NothingTech, HindiMemes, GATEtard
+        
+        This analysis is based on publicly available Reddit activity and should be considered
+        an approximation of user characteristics rather than definitive personality assessment.
+
+DEMOGRAPHICS
+============
+age_range: 22-28
+age_confidence: 0.6
+likely_gender: male
+gender_confidence: 0.4
+likely_location: India
+location_confidence: 0.7
+occupation_category: student/entry-level professional
+occupation_confidence: 0.5
+education_level: bachelor's degree
+education_confidence: 0.5
+relationship_status: unknown
+status_confidence: 0.1
+
+PERSONALITY TRAITS
+==================
+big_five: {'openness': 0.63, 'conscientiousness': 0.71, 'extraversion': 0.58, 'agreeableness': 0.65, 'neuroticism': 0.42}
+communication_style: Informative and helpful, with a touch of enthusiasm
+social_tendencies: Introverted, but with a desire to share knowledge and assist others
+decision_making: Thinking-oriented, with a focus on logical analysis
+information_processing: Sensing-oriented, with attention to detail and practicality
+lifestyle_approach: Judging, with a preference for structure and planning
+key_traits: ['analytical', 'helpful', 'detailed', 'tech-savvy']
+archetype: The Tech Enthusiast
+
+MOTIVATIONS
+===========
+primary_motivations: ['knowledge_sharing', 'community_building', 'self_improvement']
+convenience_importance: 0.5
+social_connection: 0.7
+knowledge_sharing: 0.85
+entertainment: 0.6
+self_expression: 0.4
+community_belonging: 0.75
+achievement_recognition: 0.3
+motivational_quote: Empowering others through knowledge and innovation
+
+BEHAVIORS & HABITS
+==================
+posting_habits: ['infrequent_posting', 'prefers_comments_over_posts']
+content_preferences: ['humorous_and_casual', 'tech-related_topics']
+interaction_style: laid_back_and_conversational
+time_patterns: most active during late morning hours
+platform_usage: primarily uses Reddit for entertainment and socializing
+engagement_behavior: rarely asks questions, but engages in discussions
+routine_indicators: ['consistent_daily_presence', 'shorter_posts']
+
+FRUSTRATIONS
+============
+main_frustrations: ['career_concerns', 'information_overload']
+technology_frustrations: []
+social_frustrations: ['lack_of_constructive_discussion']
+platform_frustrations: []
+time_management_issues: []
+information_overload: True
+engagement_disappointment: False
+
+GOALS & NEEDS
+=============
+primary_goals: ['stay_informed', 'help_others', 'learn_new_skills']
+information_needs: ['industry_news', 'technical_tutorials', 'best_practices']
+social_needs: ['expert_validation', 'peer_discussion']
+entertainment_needs: ['interesting_content']
+learning_objectives: ['skill_development', 'career_advancement']
+community_goals: ['contribute_knowledge', 'build_reputation']
+personal_development: ['expertise', 'communication_skills']
+long_term_aspirations: ['become_expert', 'build_influence']
+
+CITATIONS
+=========
+Post: https://reddit.com/r/developersIndia/comments/1luhgvz/please_reviewroast_my_resume_so_that_i_can_switch/
+Post: https://reddit.com/r/NothingTech/comments/1klog0r/new_gcam_update_is_here/
+Post: https://reddit.com/r/NothingTech/comments/1jmmqpw/1st_gcam_for_nothing_phone_3a3a_pro/
+Comment: https://reddit.com/r/FresherTechJobsIndia/comments/1luda35/i_need_a_job_i_am_2024_graduate_without_any/n23v94a/
+Comment: https://reddit.com/r/developersIndia/comments/1luhgvz/please_reviewroast_my_resume_so_that_i_can_switch/n1y882s/
+Comment: https://reddit.com/r/NothingTech/comments/1jmmqpw/1st_gcam_for_nothing_phone_3a3a_pro/n18l2p5/
+
+Confidence Score: 0.9308176100628931
