@@ -1,0 +1,99 @@
+
+PERSONA_TEMPLATE = """
+USER PERSONA ANALYSIS
+=====================
+
+Username: Hungry-Move-6603
+Generated: ${datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+
+ANALYSIS SUMMARY
+================
+Analysis Summary for Unknown User:
+        
+        Account Age: 1560.3888081440164 days
+        Activity Level: 2 posts, 10 comments
+        Primary Interest: finance
+        Engagement: Average sentiment -0.17
+        Top Communities: lucknow, nagpur, IndiaUnfilter
+        
+        This analysis is based on publicly available Reddit activity and should be considered
+        an approximation of user characteristics rather than definitive personality assessment.
+
+DEMOGRAPHICS
+============
+age_range: 25-40
+age_confidence: 0.6
+likely_gender: male
+gender_confidence: 0.5
+likely_location: Lucknow, India
+location_confidence: 0.8
+occupation_category: business/entrepreneur
+occupation_confidence: 0.5
+education_level: college-educated
+education_confidence: 0.4
+relationship_status: unknown
+status_confidence: 0.1
+
+PERSONALITY TRAITS
+==================
+big_five: {'openness': 0.55, 'conscientiousness': 0.45, 'extraversion': 0.4, 'agreeableness': 0.65, 'neuroticism': 0.35}
+communication_style: Direct and inquisitive, with a tendency to ask questions and seek information.
+social_tendencies: Introverted, with a preference for online interactions and a relatively low posting frequency.
+decision_making: Thinking-oriented, with a focus on logical analysis and objective evaluation.
+information_processing: Sensing-oriented, with a preference for concrete, factual information and a focus on details.
+lifestyle_approach: Perceiving-oriented, with a tendency to be adaptable and flexible in their daily life.
+key_traits: ['inquisitive', 'analytical', 'practical', 'reserved']
+archetype: The Investigator
+
+MOTIVATIONS
+===========
+primary_motivations: ['knowledge_sharing', 'community_building', 'social_connection']
+convenience_importance: 0.4
+social_connection: 0.9
+knowledge_sharing: 0.95
+entertainment: 0.5
+self_expression: 0.6
+community_belonging: 0.85
+achievement_recognition: 0.3
+motivational_quote: Connecting with others through shared experiences
+
+BEHAVIORS & HABITS
+==================
+posting_habits: ['infrequent_posting', 'prefers_comments_over_posts']
+content_preferences: ['local_discussions', 'casual_conversations']
+interaction_style: inquisitive and casual
+time_patterns: most active during morning hours
+platform_usage: primarily uses Reddit for socializing and staying updated on local events
+engagement_behavior: asks questions and seeks opinions
+routine_indicators: ['morning_check_ins', 'short_and_brief_posts']
+
+FRUSTRATIONS
+============
+main_frustrations: ['frustration_with_local_authorities', 'difficulty_finding_useful_info']
+technology_frustrations: []
+social_frustrations: ['toxic_comments', 'lack_of_constructive_discussion']
+platform_frustrations: []
+time_management_issues: []
+information_overload: False
+engagement_disappointment: True
+
+GOALS & NEEDS
+=============
+primary_goals: ['stay_informed', 'help_others']
+information_needs: ['industry_news', 'best_practices', 'market_analysis']
+social_needs: ['expert_validation', 'peer_discussion']
+entertainment_needs: ['interesting_content']
+learning_objectives: ['skill_development', 'career_advancement']
+community_goals: ['contribute_knowledge', 'build_reputation']
+personal_development: ['expertise', 'communication_skills']
+long_term_aspirations: ['become_expert', 'build_influence']
+
+CITATIONS
+=========
+Post: https://reddit.com/r/lucknow/comments/1lx50qm/productive_weekend_activities_in_lko/
+Post: https://reddit.com/r/lucknow/comments/1lwyhny/everyone_is_something_in_lko/
+Comment: https://reddit.com/r/nagpur/comments/1lyb0p5/a_very_odd_experience/n2ybup0/
+Comment: https://reddit.com/r/nagpur/comments/1lyb0p5/a_very_odd_experience/n2y7g0s/
+Comment: https://reddit.com/r/IndiaUnfilter/comments/1lw6ijt/people_are_smoking_hookah_in_the_middle_of_the/n2vkdpb/
+
+Confidence Score: 0.685
