@@ -1,0 +1,41 @@
+
+PERSONA_TEMPLATE = """
+USER PERSONA ANALYSIS
+=====================
+
+Username: $username
+Generated: ${datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+
+ANALYSIS SUMMARY
+================
+$summary
+
+DEMOGRAPHICS
+============
+$demographics
+
+PERSONALITY TRAITS
+==================
+$personality
+
+MOTIVATIONS
+===========
+$motivations
+
+BEHAVIORS & HABITS
+==================
+$behaviors_habits
+
+FRUSTRATIONS
+============
+$frustrations
+
+GOALS & NEEDS
+=============
+$goals_needs
+
+CITATIONS
+=========
+$citations
+
+Confidence Score: $confidence_score

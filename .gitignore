@@ -1,0 +1,40 @@
+# Python virtual environment
+venv/
+ENV/
+env/
+.venv/
+.ENV/
+.env/
+
+# Environment variables file
+.env
+.env.*
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# macOS system files
+.DS_Store
+
+# VS Code settings (optional)
+.vscode/
+
+# Output folders
+output/
+*.log
+persona_generator.log
+
+# Streamlit cache (optional)
+.streamlit/
+
+# Compiled files
+*.so
+*.dll
+*.exe
+*.out
+*.app
