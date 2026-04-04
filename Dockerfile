@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
-COPY config.py main.py server.py ./
+COPY config.py main.py server.py docker_entrypoint.py ./
 COPY src/ ./src/
 COPY utils/ ./utils/
 COPY templates/ ./templates/
@@ -26,5 +26,5 @@ RUN python -c "import nltk; nltk.download('punkt', quiet=True); nltk.download('s
 
 EXPOSE 8080
 
-# Long timeout: scraping + LLM can exceed 30s. PORT is set by many hosts at runtime.
-CMD ["sh", "-c", "exec gunicorn --bind 0.0.0.0:${PORT} --workers 2 --threads 2 --timeout 180 --graceful-timeout 30 --access-logfile - --error-logfile - server:app"]
+# Python reads PORT from the environment (no shell — avoids literal '$PORT' if Railway overrides CMD).
+ENTRYPOINT ["python", "docker_entrypoint.py"]

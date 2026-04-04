@@ -93,7 +93,7 @@ The system is designed to be **provider-agnostic** — you can swap between **Gr
 
 | Provider | Model | Notes |
 |---|---|---|
-| **Groq** *(default)* | `mixtral-8x7b-32768`, `llama3-70b-8192` | Ultra-fast inference, 32K context window |
+| **Groq** *(default)* | `llama-3.3-70b-versatile`, `llama-3.1-8b-instant`, `openai/gpt-oss-120b` | See [Groq models](https://console.groq.com/docs/models); older IDs (e.g. Mixtral) may be decommissioned |
 | **Google Gemini** *(alternate)* | `gemini-pro` | Switch via `LLM_PROVIDER=google` |
 
 ### Frontend & API
@@ -125,8 +125,10 @@ Reddit-Persona-Generator/
 ├── requirements-streamlit.txt    # Optional Streamlit stack
 ├── Dockerfile                     # Container image
 ├── docker-compose.yml             # Local/prod compose (env_file: `.env`)
-├── Procfile                       # Heroku-style gunicorn entry
+├── railway.json                   # Railway: Dockerfile + /health (clear bogus $PORT start cmds)
+├── Procfile                       # Heroku-style process entry
 ├── runtime.txt                    # Python version hint (e.g. Heroku)
+├── docker_entrypoint.py           # Reads PORT from env; starts gunicorn (no shell)
 ├── .env.example                   # Sample env (copy to `.env`)
 ├── .github/workflows/             # CI/CD (pytest, Docker build, GHCR push)
 ├── .gitignore                     # Excludes `.env`, `__pycache__`, etc.
@@ -331,7 +333,7 @@ GROQ_API_KEY=your_groq_api_key     # https://console.groq.com
 GOOGLE_API_KEY=your_google_api_key # https://ai.google.dev (if using Gemini)
 
 # ── Model Selection ───────────────────────────────────────────────────
-GROQ_MODEL=mixtral-8x7b-32768      # or: llama3-70b-8192
+GROQ_MODEL=llama-3.3-70b-versatile # or: llama-3.1-8b-instant, openai/gpt-oss-120b
 GOOGLE_MODEL=gemini-pro
 
 # ── Scraping Limits ───────────────────────────────────────────────────
@@ -465,6 +467,8 @@ Or: `docker compose up --build` (loads `.env`, sets `OUTPUT_DIR=/tmp/output` in 
 
 **PaaS:** On Heroku, Railway, or Render, set env vars from `.env.example`, use the `Dockerfile` or `Procfile`, and set `OUTPUT_DIR=/tmp/output` if only `/tmp` is writable. **CORS:** use `CORS_ORIGINS=https://your-frontend.com` when the UI is on another origin. **Timeouts:** persona runs can exceed 30s — the image and `Procfile` use gunicorn `--timeout 180`.
 
+**Railway:** Do not add a variable `PORT` with value `$PORT` (that passes a literal string). Railway injects `PORT` automatically. In the service settings, clear any **Custom Start Command** that references `$PORT` so the Docker `ENTRYPOINT` (`docker_entrypoint.py`) runs. This repo includes `railway.json` with a `/health` check.
+
 ---
 
 ## CI/CD (GitHub Actions)
@@ -507,7 +511,7 @@ All settings are managed via `config.py` with environment variable overrides:
 | Variable | Default | Description |
 |---|---|---|
 | `LLM_PROVIDER` | `groq` | LLM backend: `groq` or `google` |
-| `GROQ_MODEL` | `mixtral-8x7b-32768` | Groq model ID |
+| `GROQ_MODEL` | `llama-3.3-70b-versatile` | Groq model ID ([supported models](https://console.groq.com/docs/models)) |
 | `GOOGLE_MODEL` | `gemini-pro` | Gemini model ID |
 | `MAX_POSTS` | `100` | Max submissions to fetch |
 | `MAX_COMMENTS` | `200` | Max comments to fetch |

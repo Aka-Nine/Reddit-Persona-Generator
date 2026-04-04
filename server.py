@@ -140,7 +140,17 @@ def analyze():
         return jsonify({"success": False, "error": str(e)}), 400
     except Exception as e:
         logger.exception("Error generating persona")
-        err = str(e) if DEBUG else "Persona generation failed. Check server logs."
+        msg = str(e).lower()
+        if "model_decommissioned" in msg or "decommissioned" in msg:
+            err = (
+                "Groq model is no longer supported. Set GROQ_MODEL to a current model "
+                "(default in repo: llama-3.3-70b-versatile). See "
+                "https://console.groq.com/docs/models"
+            )
+        elif DEBUG:
+            err = str(e)
+        else:
+            err = "Persona generation failed. Check server logs."
         return jsonify({"success": False, "error": err}), 500
 
 

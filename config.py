@@ -19,7 +19,7 @@ GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 
 # LLM Model Settings
 LLM_PROVIDER = os.getenv('LLM_PROVIDER', 'groq')  # 'groq' or 'google'
-GROQ_MODEL = os.getenv('GROQ_MODEL', 'mixtral-8x7b-32768')
+GROQ_MODEL = os.getenv('GROQ_MODEL', 'llama-3.3-70b-versatile')
 GOOGLE_MODEL = os.getenv('GOOGLE_MODEL', 'gemini-pro')
 
 # Scraping Configuration
