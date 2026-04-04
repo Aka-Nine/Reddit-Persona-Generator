@@ -465,7 +465,7 @@ Or: `docker compose up --build` (loads `.env`, sets `OUTPUT_DIR=/tmp/output` in 
 
 **Windows:** `requirements.txt` must be **UTF-8** (not UTF-16). If pip or Docker shows `\x00` in errors, re-save the file as UTF-8.
 
-**PaaS:** On Heroku, Railway, or Render, set env vars from `.env.example`, use the `Dockerfile` or `Procfile`, and set `OUTPUT_DIR=/tmp/output` if only `/tmp` is writable. **CORS:** use `CORS_ORIGINS=https://your-frontend.com` when the UI is on another origin. **Timeouts:** persona runs can exceed 30s — the image and `Procfile` use gunicorn `--timeout 180`.
+**PaaS:** On Heroku, Railway, or Render, set env vars from `.env.example`, use the `Dockerfile` or `Procfile`, and set `OUTPUT_DIR=/tmp/output` if only `/tmp` is writable. **Persona files:** set `PERSONA_WRITE_TO_DISK=false` (default) so the API does not write `output/*.txt` on the server; the web UI keeps the generated text in **sessionStorage** for that tab only. Set `PERSONA_WRITE_TO_DISK=true` if you want files on disk (e.g. local CLI-style persistence). **CORS:** use `CORS_ORIGINS=https://your-frontend.com` when the UI is on another origin. **Timeouts:** persona runs can exceed 30s — the image and `Procfile` use gunicorn `--timeout 180`.
 
 **Railway:** Do not add a variable `PORT` with value `$PORT` (that passes a literal string). Railway injects `PORT` automatically. In the service settings, clear any **Custom Start Command** that references `$PORT` so the Docker `ENTRYPOINT` (`docker_entrypoint.py`) runs. This repo includes `railway.json` with a `/health` check.
 

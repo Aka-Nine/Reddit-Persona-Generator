@@ -1267,7 +1267,73 @@
             return `<div class="persona-prose"><h3 class="persona-doc-title">Persona analysis</h3><p class="persona-doc-sub">${sub}</p>`;
         }
 
+        const SESSION_KEY = 'reddit_persona_session_v1';
+        const SESSION_MAX = 4500000;
+
+        function savePersonaSession(username, personaContent) {
+            try {
+                const payload = JSON.stringify({
+                    username: username || '',
+                    persona_content: personaContent,
+                    savedAt: Date.now()
+                });
+                if (payload.length > SESSION_MAX) {
+                    console.warn('Persona too large for sessionStorage; skipping local save.');
+                    return;
+                }
+                sessionStorage.setItem(SESSION_KEY, payload);
+            } catch (e) {
+                console.warn('sessionStorage save failed:', e);
+            }
+        }
+
+        function loadPersonaSession() {
+            try {
+                const raw = sessionStorage.getItem(SESSION_KEY);
+                if (!raw) return null;
+                return JSON.parse(raw);
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function displayPersonaReport(username, rawText, opts) {
+            const o = opts || {};
+            const doScroll = o.scroll !== false;
+            lastPersonaRaw = normalizePersonaText(rawText || '');
+            if (username) {
+                personaReportUsername.textContent = `u/${username}`;
+                personaReportUser.hidden = false;
+            } else {
+                personaReportUser.hidden = true;
+            }
+            const header = buildReportHeader(username, lastPersonaRaw);
+            const body = formatPersonaHtml(lastPersonaRaw);
+            personaReportBody.innerHTML = header + body + '</div>';
+            personaReportSection.classList.add('active');
+            lucide.createIcons();
+            if (doScroll) {
+                personaReportSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    if (personaReportInner) {
+                        personaReportInner.classList.add('is-visible');
+                    }
+                });
+            });
+        }
+
         newAnalysisBtn.addEventListener('click', () => {
+            try {
+                sessionStorage.removeItem(SESSION_KEY);
+            } catch (e) { /* ignore */ }
+            lastPersonaRaw = '';
+            successAlert.classList.remove('active');
+            personaReportSection.classList.remove('active');
+            if (personaReportInner) {
+                personaReportInner.classList.remove('is-visible');
+            }
             document.getElementById('generator').scrollIntoView({ behavior: 'smooth', block: 'start' });
             document.getElementById('profileUrl').focus();
         });
@@ -1327,27 +1393,8 @@
                 successAlert.textContent = `Success! Persona generated for ${data.username}`;
                 successAlert.classList.add('active');
 
-                lastPersonaRaw = normalizePersonaText(data.persona_content || '');
-                if (data.username) {
-                    personaReportUsername.textContent = `u/${data.username}`;
-                    personaReportUser.hidden = false;
-                } else {
-                    personaReportUser.hidden = true;
-                }
-
-                const header = buildReportHeader(data.username, lastPersonaRaw);
-                const body = formatPersonaHtml(lastPersonaRaw);
-                personaReportBody.innerHTML = header + body + '</div>';
-                personaReportSection.classList.add('active');
-                lucide.createIcons();
-                personaReportSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                requestAnimationFrame(function () {
-                    requestAnimationFrame(function () {
-                        if (personaReportInner) {
-                            personaReportInner.classList.add('is-visible');
-                        }
-                    });
-                });
+                displayPersonaReport(data.username, data.persona_content || '', { scroll: true });
+                savePersonaSession(data.username, lastPersonaRaw);
 
             } catch (err) {
                 errorAlert.textContent = err.message || 'An unexpected error occurred.';
@@ -1358,6 +1405,16 @@
                 submitBtn.textContent = 'Generate Persona Analysis';
             }
         });
+
+        (function restorePersonaFromSession() {
+            const saved = loadPersonaSession();
+            if (saved && saved.persona_content) {
+                displayPersonaReport(saved.username, saved.persona_content, { scroll: false });
+                successAlert.textContent =
+                    'Restored your last persona from this browser tab (session only — not stored on the server).';
+                successAlert.classList.add('active');
+            }
+        })();
 
         copyBtn.addEventListener('click', () => {
             const rawText = lastPersonaRaw || personaReportBody.innerText;

@@ -16,6 +16,13 @@ from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 
 from config import OUTPUT_DIR, validate_config
+
+# Web API: default off — avoids writing to ephemeral disk on Railway; clients use sessionStorage.
+PERSONA_WRITE_TO_DISK = os.getenv("PERSONA_WRITE_TO_DISK", "false").lower() in (
+    "1",
+    "true",
+    "yes",
+)
 from src.citation_manager import CitationManager
 from src.data_processor import DataProcessor
 from src.output_generator import OutputGenerator
@@ -91,8 +98,6 @@ def analyze():
 
     logger.info("Processing request for: %s", profile_url)
 
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
-
     try:
         scraper = RedditScraper()
         processor = DataProcessor()
@@ -117,21 +122,30 @@ def analyze():
         logger.info("Generating citations...")
         citations = citation_manager.generate_citations(persona_data, user_data)
 
-        output_path = os.path.join(OUTPUT_DIR, f"{username}_persona.txt")
-        output_generator.generate_persona_file(
-            persona_data, citations, output_path, username
-        )
-
-        with open(output_path, "r", encoding="utf-8") as f:
-            persona_content = f.read()
+        if PERSONA_WRITE_TO_DISK:
+            os.makedirs(OUTPUT_DIR, exist_ok=True)
+            output_path = os.path.join(OUTPUT_DIR, f"{username}_persona.txt")
+            output_generator.generate_persona_file(
+                persona_data, citations, output_path, username
+            )
+            with open(output_path, "r", encoding="utf-8") as f:
+                persona_content = f.read()
+            saved_path = output_path
+        else:
+            persona_content = output_generator.render_persona_text(
+                persona_data, citations, username
+            )
+            saved_path = None
+            logger.info("Skipping persona file write (PERSONA_WRITE_TO_DISK=false); client should persist.")
 
         return jsonify(
             {
                 "success": True,
                 "message": "Persona generated successfully",
                 "username": username,
-                "file_path": output_path,
+                "file_path": saved_path,
                 "persona_content": persona_content,
+                "persisted_to_disk": PERSONA_WRITE_TO_DISK,
             }
         )
 
