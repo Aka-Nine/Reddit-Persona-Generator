@@ -2,11 +2,46 @@
 Configuration settings for Reddit User Persona Generator
 """
 
+import logging
 import os
+import warnings
+from typing import Optional
+
 from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
+
+_logger = logging.getLogger(__name__)
+
+# Groq retires model IDs periodically; map old env values to a supported default.
+_DEFAULT_GROQ_MODEL = "llama-3.3-70b-versatile"
+_DEPRECATED_GROQ_MODELS = {
+    "mixtral-8x7b-32768": _DEFAULT_GROQ_MODEL,
+    "mixtral-8x7b-instruct": _DEFAULT_GROQ_MODEL,
+    "llama3-70b-8192": _DEFAULT_GROQ_MODEL,
+    "llama3-8b-8192": "llama-3.1-8b-instant",
+    "llama2-70b-4096": _DEFAULT_GROQ_MODEL,
+}
+
+
+def _resolve_groq_model(raw: Optional[str]) -> str:
+    if not raw or not str(raw).strip():
+        return _DEFAULT_GROQ_MODEL
+    key = str(raw).strip().lower()
+    if key in _DEPRECATED_GROQ_MODELS:
+        replacement = _DEPRECATED_GROQ_MODELS[key]
+        warnings.warn(
+            f"GROQ_MODEL '{raw.strip()}' is no longer supported by Groq; using '{replacement}' instead. "
+            "Update your .env or hosting variables. See https://console.groq.com/docs/models",
+            UserWarning,
+            stacklevel=2,
+        )
+        _logger.warning(
+            "Remapping deprecated GROQ_MODEL %r -> %r", raw.strip(), replacement
+        )
+        return replacement
+    return str(raw).strip()
 
 # Reddit API Configuration
 REDDIT_CLIENT_ID = os.getenv('REDDIT_CLIENT_ID')
@@ -19,7 +54,7 @@ GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 
 # LLM Model Settings
 LLM_PROVIDER = os.getenv('LLM_PROVIDER', 'groq')  # 'groq' or 'google'
-GROQ_MODEL = os.getenv('GROQ_MODEL', 'llama-3.3-70b-versatile')
+GROQ_MODEL = _resolve_groq_model(os.getenv("GROQ_MODEL"))
 GOOGLE_MODEL = os.getenv('GOOGLE_MODEL', 'gemini-pro')
 
 # Scraping Configuration
