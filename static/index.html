@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reddit Persona Generator | AI Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #FF3D00;
+            --primary-gradient: linear-gradient(135deg, #FF6A00 0%, #FF3D00 100%);
+            --bg-light: #F4F2EE;
+            --text-dark: #1A1A1A;
+            --text-muted: #5A5A5A;
+            --surface: #FFFFFF;
+            --section-orange: #FF4713;
+            --footer-bg: #0B0E14;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Nav */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            position: absolute;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+        }
+
+        .hero h1 span {
+            font-style: italic;
+            font-weight: 300;
+            display: block;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 480px;
+        }
+
+        .btn {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(255, 61, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(255, 61, 0, 0.3);
+        }
+
+        .hero-visual {
+            position: absolute;
+            right: 5%;
+            top: 15%;
+            width: 500px;
+            height: 600px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .orb {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #ffffff 10%, #FF6A00 40%, #FF3D00 80%, transparent 100%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter: blur(10px);
+            opacity: 0.9;
+            z-index: 1;
+        }
+
+        .glass-panel {
+            position: absolute;
+            width: 150px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            left: 10%;
+            top: 10%;
+            z-index: 2;
+        }
+
+        /* Features */
+        .features {
+            padding: 6rem 5%;
+            background: var(--bg-light);
+        }
+        
+        .features-intro {
+            max-width: 600px;
+            margin-bottom: 4rem;
+        }
+
+        .features-intro p {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        .features-intro span {
+            color: var(--primary);
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--surface);
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card.active {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: 0 20px 40px rgba(255, 61, 0, 0.2);
+        }
+
+        .card.active p, .card.active a {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 61, 0, 0.1);
+            color: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .card.active .card-icon {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .card a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Orange Section */
+        .orange-section {
+            background: var(--section-orange);
+            color: white;
+            padding: 6rem 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            border-radius: 40px 40px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .orange-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .orange-content h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .orange-content h2 span {
+            font-style: italic;
+            font-weight: 300;
+            display: block;
+        }
+
+        .orange-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .orange-images {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .img-block {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            transform: translateX(50px);
+            opacity: 0.9;
+        }
+        
+        .img-block:nth-child(2) {
+            transform: translateX(0);
+        }
+
+        .img-block h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        /* Stats */
+        .stats {
+            background: var(--bg-light);
+            padding: 6rem 5%;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .stats-text {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        .stats-text span {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .stat-item h3 {
+            font-size: 3.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: baseline;
+        }
+
+        .stat-item h3 span {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .stat-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Generator Section */
+        .generator {
+            background: var(--primary-gradient);
+            padding: 8rem 5%;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            border-radius: 40px 40px 0 0;
+        }
+
+        .generator h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .generator h2 span {
+            font-style: italic;
+            font-weight: 300;
+            display: block;
+        }
+
+        .generator-form {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            background: var(--surface);
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .input-wrapper {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .input-wrapper label {
+            display: block;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: #F9FAFB;
+        }
+
+        .input-wrapper input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(255, 61, 0, 0.1);
+        }
+
+        .input-hint {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        .btn-large {
+            width: 100%;
+            padding: 1.25rem;
+            font-size: 1.1rem;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-large:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Loader */
+        .loader {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2rem;
+            color: var(--text-dark);
+        }
+
+        .loader.active {
+            display: flex;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 61, 0, 0.2);
+            border-left-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Full-page persona report (below generator) */
+        .persona-report-section {
+            display: none;
+            background: linear-gradient(180deg, #E8E4DE 0%, var(--bg-light) 45%, #F0EDE8 100%);
+            padding: 0 5% 5rem;
+            animation: fadeUp 0.55s ease;
+        }
+
+        .persona-report-section.active {
+            display: block;
+        }
+
+        .persona-report-inner {
+            max-width: 920px;
+            margin: 0 auto;
+            padding-top: 2.5rem;
+        }
+
+        .persona-report-card {
+            background: var(--surface);
+            border-radius: 24px;
+            box-shadow:
+                0 4px 6px rgba(0, 0, 0, 0.04),
+                0 24px 48px rgba(26, 26, 26, 0.08);
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .persona-report-accent {
+            height: 5px;
+            background: var(--primary-gradient);
+        }
+
+        .persona-report-toolbar {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1.25rem 2rem;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #ECEAE7;
+        }
+
+        .persona-report-titleblock h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            letter-spacing: -0.02em;
+        }
+
+        .persona-report-titleblock p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .persona-report-user {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(255, 61, 0, 0.08);
+            padding: 0.35rem 0.75rem;
+            border-radius: 999px;
+        }
+
+        .persona-report-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .copy-btn,
+        .persona-btn-secondary {
+            border: none;
+            padding: 0.65rem 1.15rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .copy-btn {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: 0 4px 14px rgba(255, 61, 0, 0.25);
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(255, 61, 0, 0.3);
+        }
+
+        .persona-btn-secondary {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            border: 1px solid #E5E7EB;
+        }
+
+        .persona-btn-secondary:hover {
+            background: #ECEAE7;
+        }
+
+        .persona-report-body {
+            padding: 2.5rem 2.5rem 3rem;
+            color: var(--text-dark);
+            font-size: 1rem;
+            line-height: 1.75;
+        }
+
+        @media (min-width: 768px) {
+            .persona-report-body {
+                padding: 3rem 3.5rem 3.5rem;
+            }
+        }
+
+        .persona-prose {
+            max-width: 100%;
+        }
+
+        .persona-doc-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin: 0 0 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .persona-doc-sub {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #ECEAE7;
+        }
+
+        .persona-section-title {
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--primary);
+            margin: 2.25rem 0 1rem;
+            padding-left: 0.85rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .persona-section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .persona-kv-grid {
+            display: grid;
+            gap: 0.65rem 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .persona-kv-grid {
+                grid-template-columns: minmax(140px, 220px) 1fr;
+            }
+        }
+
+        .persona-kv-key {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #4B5563;
+            word-break: break-word;
+        }
+
+        .persona-kv-val {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            word-break: break-word;
+        }
+
+        .persona-paragraph {
+            margin: 0 0 1rem;
+            color: #374151;
+        }
+
+        .persona-list {
+            margin: 0 0 1rem 1.1rem;
+            padding: 0;
+            color: #374151;
+        }
+
+        .persona-list li {
+            margin-bottom: 0.35rem;
+        }
+
+        .persona-citation {
+            font-size: 0.9rem;
+            padding: 0.65rem 0.85rem;
+            margin-bottom: 0.5rem;
+            background: #F9FAFB;
+            border-radius: 10px;
+            border: 1px solid #ECEAE7;
+            word-break: break-all;
+        }
+
+        .persona-citation a,
+        .persona-kv-val a,
+        .persona-paragraph a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .persona-citation a:hover,
+        .persona-kv-val a:hover,
+        .persona-paragraph a:hover {
+            text-decoration: underline;
+        }
+
+        .persona-report-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .persona-report-body::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+        }
+
+        /* Alert Messages */
+        .alert {
+            display: none;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            font-weight: 500;
+            text-align: left;
+        }
+        
+        .alert.active {
+            display: block;
+        }
+
+        .alert-error {
+            background: #FEF2F2;
+            color: #DC2626;
+            border: 1px solid #FCA5A5;
+        }
+
+        .alert-success {
+            background: #ECFDF5;
+            color: #059669;
+            border: 1px solid #6EE7B7;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--footer-bg);
+            color: white;
+            padding: 6rem 5% 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-brand p {
+            color: #A0AEC0;
+            font-size: 0.95rem;
+            font-style: italic;
+            max-width: 250px;
+        }
+
+        .footer-links h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #A0AEC0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            color: #A0AEC0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 3rem; }
+            .hero-visual { display: none; }
+            .orange-section, .stats { grid-template-columns: 1fr; gap: 3rem; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+        }
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.5rem; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; }
+        }
+        
+    </style>
+</head>
+<body>
+
+    <!-- Nav -->
+    <nav>
+        <div class="logo">
+            <i data-lucide="brain-circuit" size="28"></i>
+            RedditGen
+        </div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#generator" class="btn" style="padding: 0.6rem 1.2rem;">Try Now</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="about">
+        <div class="hero-content">
+            <h1>Reddit User <span>Intelligence</span></h1>
+            <p>AI consulting redefined with deep behavioral intelligence. We craft detailed psycho-graphic personas from public Reddit histories to supercharge your user understanding.</p>
+            <a href="#generator" class="btn">Generate Profile</a>
+        </div>
+        <div class="hero-visual">
+            <div class="orb"></div>
+            <div class="glass-panel"></div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="features-intro">
+            <p>We are pioneers in <span>AI profiling</span>, dedicated to helping researchers and businesses harness the power of artificial intelligence to understand audience psychology, behavior, and underlying motivations.</p>
+        </div>
+        <div class="cards">
+            <div class="card">
+                <div class="card-icon"><i data-lucide="bot"></i></div>
+                <h3>NLP Text Analysis</h3>
+                <p>Natural Language Processing models dissect sentence structure, readability, and writing style to extract cognitive patterns.</p>
+                <a href="#generator">Try It Now <i data-lucide="arrow-right" size="16"></i></a>
+            </div>
+            <div class="card active">
+                <div class="card-icon"><i data-lucide="brain"></i></div>
+                <h3>LLM Insight Mining</h3>
+                <p>Advanced Large Language Models (Groq / Gemini) infer deep motivations, Big Five traits, and personal frustrations.</p>
+                <a href="#generator">Try It Now <i data-lucide="arrow-right" size="16"></i></a>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i data-lucide="bar-chart-2"></i></div>
+                <h3>Activity Analytics</h3>
+                <p>Temporal profiling highlights active hours, preferred communities, and specific knowledge domains of interest.</p>
+                <a href="#generator">Try It Now <i data-lucide="arrow-right" size="16"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Orange Section -->
+    <section class="orange-section">
+        <div class="orange-content">
+            <h2>Personas <span>We Reveal</span></h2>
+            <p>Our intelligence pipeline is reshaping audience research worldwide. By analyzing public interactions, we enable businesses to optimize their messaging, enhance community engagement, and tailor marketing strategies efficiently.</p>
+        </div>
+        <div class="orange-images">
+            <div class="img-block">
+                <h4>The Evangelist</h4>
+                <p>Highly positive sentiment, frequent posting in niche communities.</p>
+            </div>
+            <div class="img-block">
+                <h4>The Critic</h4>
+                <p>Analytical, high question ratio, lower sentiment floor, highly engaged.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+        <div class="stats-text">
+            We've helped researchers and businesses harness the <span>power of Reddit</span> data to drive growth, understanding, and highly accurate targeted user empathy maps.
+        </div>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>1M<span>+</span></h3>
+                <p>Posts eligible for deep LLM analysis globally</p>
+            </div>
+            <div class="stat-item">
+                <h3>99<span>%</span></h3>
+                <p>Uptime guarantee for seamless profiling pipelines</p>
+            </div>
+            <div class="stat-item">
+                <h3>0.8<span>s</span></h3>
+                <p>Average latency utilizing Groq's high-speed LPU infrastructure</p>
+            </div>
+            <div class="stat-item">
+                <h3>5<span>x</span></h3>
+                <p>Faster user-research compared to traditional surveys</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Generator Section -->
+    <section class="generator" id="generator">
+        <h2>Let's Discover <span>Your Audience!</span></h2>
+        
+        <div class="generator-form">
+            <form id="personaForm">
+                <div class="input-wrapper">
+                    <label for="profileUrl">Reddit Username</label>
+                    <input type="text" id="profileUrl" placeholder="e.g. spez, u/spez, or full URL" required autocomplete="off">
+                    <div class="input-hint">Extracts publicly available posts and comments for generating the profile.</div>
+                </div>
+                
+                <button type="submit" class="btn btn-large" id="submitBtn">Generate Persona Analysis</button>
+            </form>
+
+            <!-- Loading State -->
+            <div class="loader" id="loader">
+                <div class="spinner"></div>
+                <p style="font-weight: 500;">Scraping and running NLP algorithms...<br><span style="font-size: 0.85rem; color: var(--text-muted);">This usually takes 10-30 seconds.</span></p>
+            </div>
+
+            <!-- Alerts -->
+            <div class="alert alert-error" id="errorAlert"></div>
+            <div class="alert alert-success" id="successAlert"></div>
+        </div>
+    </section>
+
+    <!-- Persona report: full section (not cramped inside the form card) -->
+    <section class="persona-report-section" id="personaReportSection" aria-live="polite">
+        <div class="persona-report-inner">
+            <div class="persona-report-card">
+                <div class="persona-report-accent" aria-hidden="true"></div>
+                <div class="persona-report-toolbar">
+                    <div class="persona-report-titleblock">
+                        <h2>Persona report</h2>
+                        <p>Structured view of the generated analysis. Copy the full text anytime.</p>
+                        <div class="persona-report-user" id="personaReportUser" hidden>
+                            <i data-lucide="user" size="14"></i>
+                            <span id="personaReportUsername"></span>
+                        </div>
+                    </div>
+                    <div class="persona-report-actions">
+                        <button type="button" class="copy-btn" id="copyBtn" title="Copy full report">
+                            <i data-lucide="copy" size="16"></i> Copy report
+                        </button>
+                        <button type="button" class="persona-btn-secondary" id="newAnalysisBtn" title="Scroll to form">
+                            <i data-lucide="arrow-up-circle" size="16"></i> New analysis
+                        </button>
+                    </div>
+                </div>
+                <div class="persona-report-body" id="personaReportBody"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3><i data-lucide="brain-circuit" size="24"></i> RedditGen</h3>
+                <p>Powered by<br>Visionary Intelligence Models</p>
+                <div style="margin-top: 1.5rem; display: flex; gap: 1rem; color: var(--primary);">
+                    <i data-lucide="twitter"></i>
+                    <i data-lucide="linkedin"></i>
+                    <i data-lucide="github"></i>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Blog & Insights</a></li>
+                    <li><a href="#">Case Studies</a></li>
+                    <li><a href="#">Tutorials</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Generals</h4>
+                <ul>
+                    <li><a href="#">Homepage</a></li>
+                    <li><a href="#">Testimonials</a></li>
+                    <li><a href="#">Category</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>© 2026 All Rights Reserved.</div>
+            <div style="display: flex; gap: 2rem;">
+                <a href="#" style="color: inherit; text-decoration: none;">Privacy Policy</a>
+                <a href="#" style="color: inherit; text-decoration: none;">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Form Logic
+        const form = document.getElementById('personaForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const loader = document.getElementById('loader');
+        const errorAlert = document.getElementById('errorAlert');
+        const successAlert = document.getElementById('successAlert');
+        const personaReportSection = document.getElementById('personaReportSection');
+        const personaReportBody = document.getElementById('personaReportBody');
+        const personaReportUser = document.getElementById('personaReportUser');
+        const personaReportUsername = document.getElementById('personaReportUsername');
+        const copyBtn = document.getElementById('copyBtn');
+        const newAnalysisBtn = document.getElementById('newAnalysisBtn');
+
+        let lastPersonaRaw = '';
+
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        function linkify(escapedText) {
+            return escapedText.replace(
+                /(https?:\/\/[^\s<>"']+)/g,
+                '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>'
+            );
+        }
+
+        function extractMeta(text) {
+            const generated = text.match(/^\s*Generated:\s*(.+)$/m);
+            return {
+                generatedLine: generated ? generated[1].trim() : null
+            };
+        }
+
+        /**
+         * Turns plain-text persona files into structured HTML (sections, key/value rows, citations).
+         */
+        function formatPersonaHtml(text) {
+            const lines = text.replace(/\r\n/g, '\n').split('\n');
+            let html = '';
+            let i = 0;
+            let inKvRun = false;
+            let listOpen = false;
+
+            function closeKvGrid() {
+                if (inKvRun) {
+                    html += '</div>';
+                    inKvRun = false;
+                }
+            }
+
+            function closeList() {
+                if (listOpen) {
+                    html += '</ul>';
+                    listOpen = false;
+                }
+            }
+
+            while (i < lines.length) {
+                const raw = lines[i];
+                const trimmed = raw.trim();
+                const nextTrim = (lines[i + 1] || '').trim();
+
+                if (trimmed && /^[=\-]{4,}$/.test(nextTrim)) {
+                    closeList();
+                    closeKvGrid();
+                    html += `<h3 class="persona-section-title">${escapeHtml(trimmed)}</h3>`;
+                    i += 2;
+                    continue;
+                }
+
+                if (!trimmed) {
+                    closeList();
+                    closeKvGrid();
+                    i++;
+                    continue;
+                }
+
+                if (/^[=\-]{4,}$/.test(trimmed)) {
+                    i++;
+                    continue;
+                }
+
+                const postComment = trimmed.match(/^(Post|Comment):\s*(https?:\/\/\S+)/i);
+                if (postComment) {
+                    closeList();
+                    closeKvGrid();
+                    const label = escapeHtml(postComment[1]);
+                    const url = escapeHtml(postComment[2]);
+                    html += `<div class="persona-citation"><strong>${label}:</strong> <a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a></div>`;
+                    i++;
+                    continue;
+                }
+
+                const colonIdx = trimmed.indexOf(':');
+                const keyPart = colonIdx > 0 ? trimmed.slice(0, colonIdx) : '';
+                const keySlug = keyPart.replace(/\s/g, '');
+                const isLikelyKey =
+                    colonIdx > 0 &&
+                    colonIdx < 72 &&
+                    !trimmed.startsWith('http') &&
+                    keySlug.length <= 48 &&
+                    /^[A-Za-z0-9_\-]+$/.test(keySlug) &&
+                    /^[a-z0-9_][a-z0-9_\s\-]*$/i.test(keyPart.trim());
+
+                if (isLikelyKey) {
+                    closeList();
+                    const key = keyPart.trim();
+                    const value = trimmed.slice(colonIdx + 1).trim();
+                    if (!inKvRun) {
+                        html += '<div class="persona-kv-grid">';
+                        inKvRun = true;
+                    }
+                    html += `<div class="persona-kv-key">${escapeHtml(key)}</div><div class="persona-kv-val">${linkify(escapeHtml(value))}</div>`;
+                    i++;
+                    continue;
+                }
+
+                closeKvGrid();
+
+                if (/^[-•*]\s+/.test(trimmed)) {
+                    const item = trimmed.replace(/^[-•*]\s+/, '');
+                    if (!listOpen) {
+                        html += '<ul class="persona-list">';
+                        listOpen = true;
+                    }
+                    html += `<li>${linkify(escapeHtml(item))}</li>`;
+                    i++;
+                    continue;
+                }
+
+                closeList();
+                html += `<p class="persona-paragraph">${linkify(escapeHtml(trimmed))}</p>`;
+                i++;
+            }
+
+            closeList();
+            closeKvGrid();
+            return html;
+        }
+
+        function buildReportHeader(username, rawText) {
+            const meta = extractMeta(rawText);
+            const u = username ? `u/${username}` : '';
+            const subParts = [];
+            if (u) subParts.push(`Profile: ${u}`);
+            if (meta.generatedLine) subParts.push(`Generated: ${meta.generatedLine}`);
+            subParts.push('Based on public Reddit activity — interpret as a research-style sketch, not a clinical profile.');
+            const sub = escapeHtml(subParts.join(' · '));
+            return `<div class="persona-prose"><h3 class="persona-doc-title">Persona analysis</h3><p class="persona-doc-sub">${sub}</p>`;
+        }
+
+        newAnalysisBtn.addEventListener('click', () => {
+            document.getElementById('generator').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.getElementById('profileUrl').focus();
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const profileUrl = document.getElementById('profileUrl').value.trim();
+            if(!profileUrl) return;
+
+            // Reset state
+            errorAlert.classList.remove('active');
+            successAlert.classList.remove('active');
+            personaReportSection.classList.remove('active');
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Processing...';
+            loader.classList.add('active');
+
+            try {
+                // Same-origin /analyze when the UI is served by Flask (any host: 127.0.0.1, localhost, LAN IP).
+                // Optional override: <meta name="api-base" content="http://127.0.0.1:5000"> for a separate static server.
+                const metaBase = document.querySelector('meta[name="api-base"]')?.getAttribute('content')?.trim();
+                const apiUrl = metaBase
+                    ? `${metaBase.replace(/\/$/, '')}/analyze`
+                    : new URL('/analyze', window.location.origin).href;
+
+                const res = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ profile_url: profileUrl })
+                });
+
+                const rawBody = await res.text();
+                let data = {};
+                if (rawBody.trim()) {
+                    try {
+                        data = JSON.parse(rawBody);
+                    } catch {
+                        throw new Error(
+                            'Server returned a non-JSON response. Open this app from the Flask server (e.g. http://127.0.0.1:5000/) or set <meta name="api-base" to your API URL.'
+                        );
+                    }
+                } else {
+                    throw new Error(
+                        'Empty response from server. Is the API running? Use the same host/port as this page, or set <meta name="api-base"> if the API is elsewhere.'
+                    );
+                }
+
+                if (!res.ok || !data.success) {
+                    throw new Error(data.error || 'Failed to analyze user.');
+                }
+
+                successAlert.textContent = `Success! Persona generated for ${data.username}`;
+                successAlert.classList.add('active');
+
+                lastPersonaRaw = data.persona_content || '';
+                if (data.username) {
+                    personaReportUsername.textContent = `u/${data.username}`;
+                    personaReportUser.hidden = false;
+                } else {
+                    personaReportUser.hidden = true;
+                }
+
+                const header = buildReportHeader(data.username, lastPersonaRaw);
+                const body = formatPersonaHtml(lastPersonaRaw);
+                personaReportBody.innerHTML = header + body + '</div>';
+                personaReportSection.classList.add('active');
+                lucide.createIcons();
+                personaReportSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            } catch (err) {
+                errorAlert.textContent = err.message || 'An unexpected error occurred.';
+                errorAlert.classList.add('active');
+            } finally {
+                loader.classList.remove('active');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Generate Persona Analysis';
+            }
+        });
+
+        copyBtn.addEventListener('click', () => {
+            const rawText = lastPersonaRaw || personaReportBody.innerText;
+            navigator.clipboard.writeText(rawText).then(() => {
+                const originalHtml = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i data-lucide="check" size="16"></i> Copied!';
+                lucide.createIcons();
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalHtml;
+                    lucide.createIcons();
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -26,34 +26,7 @@ from src.data_processor import DataProcessor
 from src.persona_analyzer import PersonaAnalyzer
 from src.citation_manager import CitationManager
 from src.output_generator import OutputGenerator
-
-def validate_reddit_url(url: str) -> str:
-    """Validate Reddit URL and extract username"""
-    if not url:
-        raise ValueError("Reddit URL is required")
-    
-    if url.startswith('https://www.reddit.com/user/'):
-        username = url.split('/user/')[1].split('/')[0]
-    elif url.startswith('https://reddit.com/user/'):
-        username = url.split('/user/')[1].split('/')[0]
-    elif url.startswith('https://www.reddit.com/u/'):
-        username = url.split('/u/')[1].split('/')[0]
-    elif url.startswith('https://reddit.com/u/'):
-        username = url.split('/u/')[1].split('/')[0]
-    elif url.startswith('u/'):
-        username = url[2:]
-    elif url.startswith('/u/'):
-        username = url[3:]
-    else:
-        # Assume it's just a username
-        username = url
-    
-    username = username.strip('/')
-    
-    if not username:
-        raise ValueError("Could not extract username from URL")
-    
-    return username
+from utils.reddit_url import validate_reddit_url
 
 def setup_logging(log_level: str):
     """Setup logging configuration"""

@@ -9,6 +9,7 @@ env/
 # Environment variables file
 .env
 .env.*
+!.env.example
 
 # Python cache files
 __pycache__/
@@ -24,9 +25,9 @@ __pycache__/
 # VS Code settings (optional)
 .vscode/
 
-# Output folders
-
+# Generated output (optional: keep samples tracked by not ignoring output/)
 persona_generator.log
+*.log
 
 # Streamlit cache (optional)
 .streamlit/

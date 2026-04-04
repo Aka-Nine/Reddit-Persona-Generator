@@ -25,6 +25,8 @@
 - [Environment Variables](#-environment-variables)
 - [Installation](#-installation)
 - [Usage](#-usage)
+- [Web UI & Docker](#-web-ui--docker)
+- [CI/CD (GitHub Actions)](#cicd-github-actions)
 - [Streamlit Viewer](#-streamlit-viewer)
 - [Configuration Reference](#-configuration-reference)
 - [Testing](#-testing)
@@ -84,7 +86,7 @@ The system is designed to be **provider-agnostic** — you can swap between **Gr
 | **NLTK** | Tokenization, stopword removal, frequency distribution |
 | **TextBlob** | Polarity + subjectivity sentiment scoring |
 | **VADER (vaderSentiment)** | Fine-grained social-media-optimized sentiment analysis |
-| **spaCy** | Named Entity Recognition (NER), POS tagging |
+| **textstat** | Readability scoring (used in `text_utils.py`) |
 | **text_utils.py** | Custom keyword extraction and readability scoring |
 
 ### LLM Providers
@@ -94,11 +96,19 @@ The system is designed to be **provider-agnostic** — you can swap between **Gr
 | **Groq** *(default)* | `mixtral-8x7b-32768`, `llama3-70b-8192` | Ultra-fast inference, 32K context window |
 | **Google Gemini** *(alternate)* | `gemini-pro` | Switch via `LLM_PROVIDER=google` |
 
-### Frontend
+### Frontend & API
 
 | Technology | Role |
 |---|---|
-| **Streamlit** | Interactive web viewer for persona `.txt` output |
+| **Flask** | Web UI + `POST /analyze` API (`server.py`, `static/`) — use same host/port as the page to avoid CORS issues |
+| **Streamlit** | Optional viewer for persona `.txt` output (`pip install -r requirements-streamlit.txt`) |
+
+### Deploy
+
+| Technology | Role |
+|---|---|
+| **Docker / gunicorn** | `Dockerfile`, `docker-compose.yml`, `Procfile` for production |
+| **GitHub Actions** | CI (pytest + image build) and CD (push to `ghcr.io` on tags) — see [CI/CD](#cicd-github-actions) |
 
 ---
 
@@ -107,11 +117,19 @@ The system is designed to be **provider-agnostic** — you can swap between **Gr
 ```
 Reddit-Persona-Generator/
 │
-├── main.py                        # Entry point — orchestrates the full pipeline
+├── main.py                        # CLI — orchestrates the full pipeline
+├── server.py                      # Flask API + static web UI
 ├── config.py                      # Centralized config & env var validation
-├── visualizer.py                  # Streamlit-based persona viewer
-├── requirements.txt               # Python dependencies
-├── .gitignore                     # Excludes .env, __pycache__, output/
+├── visualizer.py                  # Optional Streamlit persona viewer
+├── requirements.txt               # App dependencies (production)
+├── requirements-streamlit.txt    # Optional Streamlit stack
+├── Dockerfile                     # Container image
+├── docker-compose.yml             # Local/prod compose (env_file: `.env`)
+├── Procfile                       # Heroku-style gunicorn entry
+├── runtime.txt                    # Python version hint (e.g. Heroku)
+├── .env.example                   # Sample env (copy to `.env`)
+├── .github/workflows/             # CI/CD (pytest, Docker build, GHCR push)
+├── .gitignore                     # Excludes `.env`, `__pycache__`, etc.
 │
 ├── src/                           # Core pipeline modules
 │   ├── reddit_scraper.py          # PRAW-based Reddit data fetcher
@@ -122,22 +140,24 @@ Reddit-Persona-Generator/
 │
 ├── utils/
 │   ├── text_utils.py              # Keyword extraction, readability scoring
-│   └── validation.py              # URL validation, input sanitization
+│   ├── validation.py              # URL validation, input sanitization
+│   └── reddit_url.py              # Shared Reddit username/URL parsing (CLI + server)
+│
+├── static/
+│   └── index.html                 # Web UI (served by Flask)
 │
 ├── templates/
 │   └── persona_template.txt       # Output format template
 │
-├── output/                        # Generated persona files (gitignored)
-│   ├── spez_persona.txt           # Sample output — Reddit CEO
-│   └── sample_user2.txt           # Additional sample
+├── output/                        # Generated persona `.txt` files
+│   └── …                          # e.g. `spez_persona.txt`
 │
-├── tests/                         # Unit tests
+├── tests/
 │   ├── test_scraper.py
-│   ├── test_processor.py
-│   ├── test_analyzer.py
-│   └── test_output.py
+│   └── test_analyser.py
 │
-└── info.txt                       # Project notes
+├── info.txt                       # Project notes
+└── Readme.md
 ```
 
 ---
@@ -417,6 +437,49 @@ LLM_PROVIDER=google python main.py https://www.reddit.com/user/spez
 LLM_PROVIDER=google
 GOOGLE_API_KEY=your_key_here
 ```
+
+---
+
+## 🌐 Web UI & Docker
+
+Run the **Flask** app so the browser and `POST /analyze` share the same origin (avoids CORS / empty JSON responses):
+
+```bash
+python server.py
+```
+
+Open `http://127.0.0.1:5000/` (or the URL shown in the terminal). Use the same `.env` variables as the CLI.
+
+**Health checks:** `GET /health` or `GET /healthz`.
+
+### Docker
+
+```bash
+docker build -t persona-gen .
+docker run --rm --env-file .env -p 8080:8080 persona-gen
+```
+
+Or: `docker compose up --build` (loads `.env`, sets `OUTPUT_DIR=/tmp/output` in the container).
+
+**Windows:** `requirements.txt` must be **UTF-8** (not UTF-16). If pip or Docker shows `\x00` in errors, re-save the file as UTF-8.
+
+**PaaS:** On Heroku, Railway, or Render, set env vars from `.env.example`, use the `Dockerfile` or `Procfile`, and set `OUTPUT_DIR=/tmp/output` if only `/tmp` is writable. **CORS:** use `CORS_ORIGINS=https://your-frontend.com` when the UI is on another origin. **Timeouts:** persona runs can exceed 30s — the image and `Procfile` use gunicorn `--timeout 180`.
+
+---
+
+## CI/CD (GitHub Actions)
+
+| Workflow | When | What |
+|---|---|---|
+| **CI** (`.github/workflows/ci.yml`) | Push / PR to `main` or `master` | `pytest` + Docker **build** (no push) |
+| **CD** (`.github/workflows/cd.yml`) | Git tag `v*` (e.g. `v1.0.0`) or **Run workflow** in Actions | Build and **push** image to **GHCR** (`ghcr.io/<owner>/<repo>`) |
+| **Dependabot** (`.github/dependabot.yml`) | Weekly / monthly | PRs for pip and GitHub Actions updates |
+
+**One-time:** Repo **Settings → Actions → General → Workflow permissions** — allow **read and write** (or `packages: write`) so `GITHUB_TOKEN` can push to GHCR.
+
+**Release:** `git tag v1.0.0 && git push origin v1.0.0` → image tags include `v1.0.0` and `latest`. **Manual run:** Actions → **CD** → **Run workflow** (optional extra tag via input).
+
+**Adding new checks:** edit `.github/workflows/ci.yml` (e.g. add `ruff`, matrix Python versions, or a job that runs `docker compose run`).
 
 ---
 

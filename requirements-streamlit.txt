@@ -1,0 +1,3 @@
+# Optional: Streamlit visualizer (visualizer.py)
+-r requirements.txt
+streamlit>=1.28.0

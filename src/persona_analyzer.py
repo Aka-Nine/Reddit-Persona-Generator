@@ -5,9 +5,10 @@ Uses LLM to analyze user data and generate persona characteristics
 
 import json
 import logging
+import warnings
 from typing import Dict, List, Optional
+
 from groq import Groq
-import google.generativeai as genai
 
 from config import (
     LLM_PROVIDER, GROQ_API_KEY, GOOGLE_API_KEY, 
@@ -30,6 +31,11 @@ class PersonaAnalyzer:
                 self.model = GROQ_MODEL
                 self.logger.info("Groq client initialized")
             elif self.provider == 'google':
+                # Lazy import: avoids deprecated package (and its FutureWarning) on Groq-only deployments.
+                with warnings.catch_warnings():
+                    warnings.simplefilter("ignore", FutureWarning)
+                    import google.generativeai as genai  # noqa: PLC0415
+
                 genai.configure(api_key=GOOGLE_API_KEY)
                 self.client = genai.GenerativeModel(GOOGLE_MODEL)
                 self.model = GOOGLE_MODEL

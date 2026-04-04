@@ -41,32 +41,25 @@ CITATION_LIMIT = int(os.getenv('CITATION_LIMIT', '3'))
 LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
 LOG_FILE = os.getenv('LOG_FILE', 'persona_generator.log')
 
-# Validation Settings
-REQUIRED_ENV_VARS = [
-    'REDDIT_CLIENT_ID',
-    'REDDIT_CLIENT_SECRET',
-    'GROQ_API_KEY'  # or GOOGLE_API_KEY
-]
-
 def validate_config():
-    """Validate that all required configuration is present"""
-    missing_vars = []
-    
-    for var in REQUIRED_ENV_VARS:
-        if var == 'GROQ_API_KEY' and LLM_PROVIDER == 'google':
-            continue
-        if var == 'GOOGLE_API_KEY' and LLM_PROVIDER == 'groq':
-            continue
-        if not os.getenv(var):
-            missing_vars.append(var)
-    
-    # Check for LLM provider specific keys
-    if LLM_PROVIDER == 'groq' and not GROQ_API_KEY:
-        missing_vars.append('GROQ_API_KEY')
-    elif LLM_PROVIDER == 'google' and not GOOGLE_API_KEY:
-        missing_vars.append('GOOGLE_API_KEY')
-    
-    if missing_vars:
-        raise ValueError(f"Missing required environment variables: {', '.join(missing_vars)}")
-    
+    """Validate that all required configuration is present."""
+    missing = []
+
+    if not REDDIT_CLIENT_ID:
+        missing.append("REDDIT_CLIENT_ID")
+    if not REDDIT_CLIENT_SECRET:
+        missing.append("REDDIT_CLIENT_SECRET")
+
+    if LLM_PROVIDER == "groq":
+        if not GROQ_API_KEY:
+            missing.append("GROQ_API_KEY")
+    elif LLM_PROVIDER == "google":
+        if not GOOGLE_API_KEY:
+            missing.append("GOOGLE_API_KEY")
+    else:
+        raise ValueError(f"Unsupported LLM_PROVIDER: {LLM_PROVIDER!r} (use 'groq' or 'google')")
+
+    if missing:
+        raise ValueError(f"Missing required environment variables: {', '.join(sorted(set(missing)))}")
+
     return True
