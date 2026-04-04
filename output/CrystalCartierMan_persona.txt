@@ -1,0 +1,100 @@
+
+PERSONA_TEMPLATE = """
+USER PERSONA ANALYSIS
+=====================
+
+Username: CrystalCartierMan
+Generated: ${datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+
+ANALYSIS SUMMARY
+================
+Analysis Summary for Unknown User:
+        
+        Account Age: 148.8356857590267 days
+        Activity Level: 91 posts, 159 comments
+        Primary Interest: technology
+        Engagement: Average sentiment 0.06
+        Top Communities: Eminem, autocorrect, lies
+        
+        This analysis is based on publicly available Reddit activity and should be considered
+        an approximation of user characteristics rather than definitive personality assessment.
+
+DEMOGRAPHICS
+============
+age_range: 18-24
+age_confidence: 0.6
+likely_gender: Male
+gender_confidence: 0.4
+likely_location: unknown
+location_confidence: 0.1
+occupation_category: Student
+occupation_confidence: 0.3
+education_level: Some college
+education_confidence: 0.4
+relationship_status: Single
+status_confidence: 0.3
+
+PERSONALITY TRAITS
+==================
+big_five: {'openness': 0.65, 'conscientiousness': 0.55, 'extraversion': 0.6, 'agreeableness': 0.75, 'neuroticism': 0.45}
+communication_style: Informative and conversational, with a touch of humor
+social_tendencies: Ambiverted, leaning towards extraversion
+decision_making: Thinking preference, with a logical and analytical approach
+information_processing: Intuition preference, with a focus on patterns and possibilities
+lifestyle_approach: Perceiving preference, with a flexible and adaptable nature
+key_traits: ['analytical', 'curious', 'helpful', 'humorous', 'tech-savvy']
+archetype: The Tech-Savvy Explorer
+
+MOTIVATIONS
+===========
+primary_motivations: ['knowledge_sharing', 'community_building', 'entertainment']
+convenience_importance: 0.7
+social_connection: 0.85
+knowledge_sharing: 0.92
+entertainment: 0.75
+self_expression: 0.55
+community_belonging: 0.85
+achievement_recognition: 0.35
+motivational_quote: Sharing knowledge is my superpower
+
+BEHAVIORS & HABITS
+==================
+posting_habits: ['consistent_morning_posting', 'balances_posts_and_comments']
+content_preferences: ['entertainment_and_humor', 'storytelling']
+interaction_style: engaging and conversational
+time_patterns: most active during early morning hours
+platform_usage: primarily uses Reddit for entertainment and socializing
+engagement_behavior: asks questions and sparks discussions
+routine_indicators: ['daily_morning_check_ins', 'varied_post_lengths']
+
+FRUSTRATIONS
+============
+main_frustrations: ['self_expression_frustration', 'lacking_engagement']
+technology_frustrations: []
+social_frustrations: ['unhelpful_responses', 'lacking_substantive_discussion']
+platform_frustrations: []
+time_management_issues: []
+information_overload: False
+engagement_disappointment: True
+
+GOALS & NEEDS
+=============
+primary_goals: ['stay_informed', 'help_others', 'learn_new_skills']
+information_needs: ['industry_news', 'technical_tutorials', 'best_practices']
+social_needs: ['peer_discussion', 'expert_validation', 'mentorship']
+entertainment_needs: ['interesting_content', 'community_events']
+learning_objectives: ['skill_development', 'hobby_improvement']
+community_goals: ['contribute_knowledge', 'build_reputation']
+personal_development: ['expertise', 'communication_skills']
+long_term_aspirations: ['become_expert', 'build_influence']
+
+CITATIONS
+=========
+Post: https://reddit.com/r/u_CrystalCartierMan/comments/1lr1xs2/welcome_to_my_profile/
+Post: https://reddit.com/r/anonymauson/comments/1mb462f/all_because_of_you_have_lost_the_game/
+Post: https://reddit.com/r/motorola/comments/1mb31hr/my_phone_just_created_this_random_folder_with/
+Comment: https://reddit.com/r/im14andthisisdeep/comments/1m884ex/found_this_in_a_vid/n5jdi36/
+Comment: https://reddit.com/r/AskOuija/comments/1mb380e/i_love_to_furiously_jackoff_to_r/n5jcwva/
+Comment: https://reddit.com/r/Eminem/comments/1mb3hv2/does_anyone_have_a_pet_with_an_eminem_themed_name/n5jb7fu/
+
+Confidence Score: 0.8519422505198813

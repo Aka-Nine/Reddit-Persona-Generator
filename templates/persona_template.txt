@@ -1,10 +1,8 @@
-
-PERSONA_TEMPLATE = """
 USER PERSONA ANALYSIS
 =====================
 
 Username: $username
-Generated: ${datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+Generated: $generated_time
 
 ANALYSIS SUMMARY
 ================

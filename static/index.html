@@ -824,6 +824,46 @@
             .footer-grid { grid-template-columns: 1fr; }
             .stats-grid { grid-template-columns: 1fr; }
         }
+
+        /* Scroll-triggered reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(2rem);
+            transition:
+                opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+            transition-delay: var(--reveal-delay, 0s);
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .cards .card:nth-child(1) { --reveal-delay: 0s; }
+        .cards .card:nth-child(2) { --reveal-delay: 0.1s; }
+        .cards .card:nth-child(3) { --reveal-delay: 0.2s; }
+
+        .orange-images .img-block:nth-child(1) { --reveal-delay: 0s; }
+        .orange-images .img-block:nth-child(2) { --reveal-delay: 0.12s; }
+
+        .stats-grid .stat-item:nth-child(1) { --reveal-delay: 0s; }
+        .stats-grid .stat-item:nth-child(2) { --reveal-delay: 0.06s; }
+        .stats-grid .stat-item:nth-child(3) { --reveal-delay: 0.12s; }
+        .stats-grid .stat-item:nth-child(4) { --reveal-delay: 0.18s; }
+
+        .footer-grid > div:nth-child(1) { --reveal-delay: 0s; }
+        .footer-grid > div:nth-child(2) { --reveal-delay: 0.08s; }
+        .footer-grid > div:nth-child(3) { --reveal-delay: 0.16s; }
+        .footer-grid > div:nth-child(4) { --reveal-delay: 0.24s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
         
     </style>
 </head>
@@ -844,12 +884,12 @@
 
     <!-- Hero -->
     <section class="hero" id="about">
-        <div class="hero-content">
+        <div class="hero-content reveal">
             <h1>Reddit User <span>Intelligence</span></h1>
             <p>AI consulting redefined with deep behavioral intelligence. We craft detailed psycho-graphic personas from public Reddit histories to supercharge your user understanding.</p>
             <a href="#generator" class="btn">Generate Profile</a>
         </div>
-        <div class="hero-visual">
+        <div class="hero-visual reveal" style="--reveal-delay: 0.12s">
             <div class="orb"></div>
             <div class="glass-panel"></div>
         </div>
@@ -857,23 +897,23 @@
 
     <!-- Features -->
     <section class="features" id="features">
-        <div class="features-intro">
+        <div class="features-intro reveal">
             <p>We are pioneers in <span>AI profiling</span>, dedicated to helping researchers and businesses harness the power of artificial intelligence to understand audience psychology, behavior, and underlying motivations.</p>
         </div>
         <div class="cards">
-            <div class="card">
+            <div class="card reveal">
                 <div class="card-icon"><i data-lucide="bot"></i></div>
                 <h3>NLP Text Analysis</h3>
                 <p>Natural Language Processing models dissect sentence structure, readability, and writing style to extract cognitive patterns.</p>
                 <a href="#generator">Try It Now <i data-lucide="arrow-right" size="16"></i></a>
             </div>
-            <div class="card active">
+            <div class="card active reveal">
                 <div class="card-icon"><i data-lucide="brain"></i></div>
                 <h3>LLM Insight Mining</h3>
                 <p>Advanced Large Language Models (Groq / Gemini) infer deep motivations, Big Five traits, and personal frustrations.</p>
                 <a href="#generator">Try It Now <i data-lucide="arrow-right" size="16"></i></a>
             </div>
-            <div class="card">
+            <div class="card reveal">
                 <div class="card-icon"><i data-lucide="bar-chart-2"></i></div>
                 <h3>Activity Analytics</h3>
                 <p>Temporal profiling highlights active hours, preferred communities, and specific knowledge domains of interest.</p>
@@ -884,16 +924,16 @@
 
     <!-- Orange Section -->
     <section class="orange-section">
-        <div class="orange-content">
+        <div class="orange-content reveal">
             <h2>Personas <span>We Reveal</span></h2>
             <p>Our intelligence pipeline is reshaping audience research worldwide. By analyzing public interactions, we enable businesses to optimize their messaging, enhance community engagement, and tailor marketing strategies efficiently.</p>
         </div>
         <div class="orange-images">
-            <div class="img-block">
+            <div class="img-block reveal">
                 <h4>The Evangelist</h4>
                 <p>Highly positive sentiment, frequent posting in niche communities.</p>
             </div>
-            <div class="img-block">
+            <div class="img-block reveal">
                 <h4>The Critic</h4>
                 <p>Analytical, high question ratio, lower sentiment floor, highly engaged.</p>
             </div>
@@ -902,23 +942,23 @@
 
     <!-- Stats -->
     <section class="stats">
-        <div class="stats-text">
+        <div class="stats-text reveal">
             We've helped researchers and businesses harness the <span>power of Reddit</span> data to drive growth, understanding, and highly accurate targeted user empathy maps.
         </div>
         <div class="stats-grid">
-            <div class="stat-item">
+            <div class="stat-item reveal">
                 <h3>1M<span>+</span></h3>
                 <p>Posts eligible for deep LLM analysis globally</p>
             </div>
-            <div class="stat-item">
+            <div class="stat-item reveal">
                 <h3>99<span>%</span></h3>
                 <p>Uptime guarantee for seamless profiling pipelines</p>
             </div>
-            <div class="stat-item">
+            <div class="stat-item reveal">
                 <h3>0.8<span>s</span></h3>
                 <p>Average latency utilizing Groq's high-speed LPU infrastructure</p>
             </div>
-            <div class="stat-item">
+            <div class="stat-item reveal">
                 <h3>5<span>x</span></h3>
                 <p>Faster user-research compared to traditional surveys</p>
             </div>
@@ -927,9 +967,9 @@
 
     <!-- Generator Section -->
     <section class="generator" id="generator">
-        <h2>Let's Discover <span>Your Audience!</span></h2>
+        <h2 class="reveal">Let's Discover <span>Your Audience!</span></h2>
         
-        <div class="generator-form">
+        <div class="generator-form reveal" style="--reveal-delay: 0.1s">
             <form id="personaForm">
                 <div class="input-wrapper">
                     <label for="profileUrl">Reddit Username</label>
@@ -954,7 +994,7 @@
 
     <!-- Persona report: full section (not cramped inside the form card) -->
     <section class="persona-report-section" id="personaReportSection" aria-live="polite">
-        <div class="persona-report-inner">
+        <div class="persona-report-inner reveal" id="personaReportInner">
             <div class="persona-report-card">
                 <div class="persona-report-accent" aria-hidden="true"></div>
                 <div class="persona-report-toolbar">
@@ -983,7 +1023,7 @@
     <!-- Footer -->
     <footer>
         <div class="footer-grid">
-            <div class="footer-brand">
+            <div class="footer-brand reveal">
                 <h3><i data-lucide="brain-circuit" size="24"></i> RedditGen</h3>
                 <p>Powered by<br>Visionary Intelligence Models</p>
                 <div style="margin-top: 1.5rem; display: flex; gap: 1rem; color: var(--primary);">
@@ -992,7 +1032,7 @@
                     <i data-lucide="github"></i>
                 </div>
             </div>
-            <div class="footer-links">
+            <div class="footer-links reveal">
                 <h4>Company</h4>
                 <ul>
                     <li><a href="#">About Us</a></li>
@@ -1000,7 +1040,7 @@
                     <li><a href="#">Contact</a></li>
                 </ul>
             </div>
-            <div class="footer-links">
+            <div class="footer-links reveal">
                 <h4>Resources</h4>
                 <ul>
                     <li><a href="#">Blog & Insights</a></li>
@@ -1008,7 +1048,7 @@
                     <li><a href="#">Tutorials</a></li>
                 </ul>
             </div>
-            <div class="footer-links">
+            <div class="footer-links reveal">
                 <h4>Generals</h4>
                 <ul>
                     <li><a href="#">Homepage</a></li>
@@ -1030,6 +1070,49 @@
         // Initialize Lucide Icons
         lucide.createIcons();
 
+        /** Fix legacy template bugs: broken Generated line + accidental Python wrapper in .txt */
+        function normalizePersonaText(text) {
+            if (!text) return '';
+            let t = text.replace(/^\s*PERSONA_TEMPLATE\s*=\s*"""\s*\r?\n/, '');
+            const prettyTime = new Date().toLocaleString(undefined, {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            t = t.replace(
+                /Generated:\s*\$\{datetime\.now\(\)\.strftime\([^)]*\)\}/g,
+                'Generated: ' + prettyTime
+            );
+            return t;
+        }
+
+        (function initScrollReveal() {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelectorAll('.reveal').forEach(function (el) {
+                    el.classList.add('is-visible');
+                });
+                return;
+            }
+            const observer = new IntersectionObserver(
+                function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.06 }
+            );
+            document.querySelectorAll('.reveal').forEach(function (el) {
+                if (el.id !== 'personaReportInner') {
+                    observer.observe(el);
+                }
+            });
+        })();
+
         // Form Logic
         const form = document.getElementById('personaForm');
         const submitBtn = document.getElementById('submitBtn');
@@ -1037,6 +1120,7 @@
         const errorAlert = document.getElementById('errorAlert');
         const successAlert = document.getElementById('successAlert');
         const personaReportSection = document.getElementById('personaReportSection');
+        const personaReportInner = document.getElementById('personaReportInner');
         const personaReportBody = document.getElementById('personaReportBody');
         const personaReportUser = document.getElementById('personaReportUser');
         const personaReportUsername = document.getElementById('personaReportUsername');
@@ -1198,6 +1282,9 @@
             errorAlert.classList.remove('active');
             successAlert.classList.remove('active');
             personaReportSection.classList.remove('active');
+            if (personaReportInner) {
+                personaReportInner.classList.remove('is-visible');
+            }
             
             submitBtn.disabled = true;
             submitBtn.textContent = 'Processing...';
@@ -1240,7 +1327,7 @@
                 successAlert.textContent = `Success! Persona generated for ${data.username}`;
                 successAlert.classList.add('active');
 
-                lastPersonaRaw = data.persona_content || '';
+                lastPersonaRaw = normalizePersonaText(data.persona_content || '');
                 if (data.username) {
                     personaReportUsername.textContent = `u/${data.username}`;
                     personaReportUser.hidden = false;
@@ -1254,6 +1341,13 @@
                 personaReportSection.classList.add('active');
                 lucide.createIcons();
                 personaReportSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                requestAnimationFrame(function () {
+                    requestAnimationFrame(function () {
+                        if (personaReportInner) {
+                            personaReportInner.classList.add('is-visible');
+                        }
+                    });
+                });
 
             } catch (err) {
                 errorAlert.textContent = err.message || 'An unexpected error occurred.';

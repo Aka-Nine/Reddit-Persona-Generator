@@ -1,0 +1,102 @@
+
+PERSONA_TEMPLATE = """
+USER PERSONA ANALYSIS
+=====================
+
+Username: Trick-Interaction396
+Generated: ${datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+
+ANALYSIS SUMMARY
+================
+Analysis Summary for Unknown User:
+        
+        Account Age: 688.6598566459147 days
+        Activity Level: 100 posts, 196 comments
+        Primary Interest: gaming
+        Engagement: Average sentiment 0.10
+        Top Communities: Warhammer40k, Ultramarines, WarhammerCompetitive
+        
+        This analysis is based on publicly available Reddit activity and should be considered
+        an approximation of user characteristics rather than definitive personality assessment.
+
+DEMOGRAPHICS
+============
+age_range: 30-40
+age_confidence: 0.55
+likely_gender: male
+gender_confidence: 0.6
+likely_location: United States or other English‑speaking country
+location_confidence: 0.45
+occupation_category: technology (data science / software development)
+occupation_confidence: 0.65
+education_level: bachelor's degree or higher (likely master's)
+education_confidence: 0.5
+relationship_status: married
+status_confidence: 0.4
+
+PERSONALITY TRAITS
+==================
+big_five: {'openness': 0.78, 'conscientiousness': 0.62, 'extraversion': 0.34, 'agreeableness': 0.71, 'neuroticism': 0.45}
+communication_style: Clear, detail‑oriented, and moderately formal. The user writes long posts with a balanced mix of questions and statements, uses few exclamations or all‑caps, and tends to provide helpful, solution‑focused replies.
+social_tendencies: Predominantly introverted; prefers asynchronous, text‑based interaction over real‑time socializing. Activity peaks during late‑night hours, suggesting a night‑owl pattern and comfort with solitary online communities.
+decision_making: Thinking – decisions are framed around logic, efficiency, and objective criteria (e.g., low‑stress DS jobs, optimal terrain sizes).
+information_processing: Intuition – shows a preference for abstract, strategic concepts (gaming tactics, data‑science career paths) and enjoys exploring future possibilities rather than focusing solely on concrete details.
+lifestyle_approach: Judging – the user structures activity around planned posts, seeks organized solutions (e.g., specific terrain dimensions), and demonstrates a goal‑oriented, systematic approach to both hobby and professional topics.
+key_traits: ['analytical', 'strategic', 'detail‑oriented', 'helpful', 'curious']
+archetype: The Analyst (INTJ/INTP‑like profile)
+
+MOTIVATIONS
+===========
+primary_motivations: ['knowledge_sharing', 'community_building', 'achievement_recognition', 'self_expression']
+convenience_importance: 0.55
+social_connection: 0.78
+knowledge_sharing: 0.92
+entertainment: 0.62
+self_expression: 0.51
+community_belonging: 0.81
+achievement_recognition: 0.44
+motivational_quote: When you share what you know, you turn a hobby into a community.
+
+BEHAVIORS & HABITS
+==================
+posting_habits: ['consistent_daily_posting', 'prefers_comments_over_posts', 'moderate_post_volume (~1.3 posts per day)']
+content_preferences: ['Warhammer_40k_discussions', 'technical_career_and_development_questions', 'strategic_gameplay_analysis']
+interaction_style: helpful and analytical
+time_patterns: most active during late‑night/early‑morning hours (around 3:00)
+platform_usage: primarily uses Reddit for learning, sharing niche hobby knowledge, and professional development
+engagement_behavior: responds thoughtfully to questions, favors detailed explanations over brief exclamations
+routine_indicators: ['daily check‑ins with short posts or comments', 'longer, more in‑depth posts on weekends or days with higher free time']
+
+FRUSTRATIONS
+============
+main_frustrations: ['career_stress_and_burnout', 'difficulty_finding_affordable_equipment', 'repetitive_content_seeking', 'financial_pressure']
+technology_frustrations: ['slow_loading_times_on_data_heavy_subreddits', 'poor_search_functionality_for_niche_items', 'inadequate_filtering_of_low‑quality_posts']
+social_frustrations: ['lack_of_constructive_discussion_on_job‑related_posts', 'perceived_toxicity_when_seeking_help', 'feeling_of_isolation_in_specialty_communities']
+platform_frustrations: ['unclear_moderation_guidelines_for_off‑topic_requests', 'limited_formatting_options_for_detailed_requests', 'algorithmic_feed_prioritizing_high‑engagement_content_over_helpful_content']
+time_management_issues: ['spending_excessive_time_scrolling_for_relevant_answers', 'difficulty_prioritizing_between_work_and_personal_interests']
+information_overload: True
+engagement_disappointment: True
+burnout_concerns: True
+financial_stress: True
+
+GOALS & NEEDS
+=============
+primary_goals: ['share_knowledge', 'stay_updated_on_gaming', 'help_community']
+information_needs: ['game_mechanics_tutorials', 'industry_updates', 'strategy_guides']
+social_needs: ['peer_recognition', 'feedback_on_content', 'collaboration']
+entertainment_needs: ['gaming_memes', 'live_streams', 'community_events']
+learning_objectives: ['master_game_strategies', 'content_creation_skills', 'technical_modding']
+community_goals: ['build_reputation', 'mentor_new_players', 'increase_visibility']
+personal_development: ['communication_skills', 'critical_thinking', 'leadership']
+long_term_aspirations: ['become_gaming_expert', 'influence_gaming_community', 'create_impact_through_content']
+
+CITATIONS
+=========
+Post: https://reddit.com/r/datascience/comments/1po3sqq/does_anyone_have_ds_job_that_is_low_stress/
+Post: https://reddit.com/r/WarhammerCompetitive/comments/1pfzta8/can_anyone_recommend_decent_affordable_and/
+Post: https://reddit.com/r/Warhammer40k/comments/1pfh9mw/does_ruin_footprint_block_los_for_units_within_a/
+Comment: https://reddit.com/r/Layoffs/comments/1po2aw8/138m_americans_have_been_laid_off_btw_janaug_2025/nud6ssw/
+Comment: https://reddit.com/r/okbuddycinephile/comments/1po0akg/favorite_character_who_is_staunchly_convinced/nud34ps/
+Comment: https://reddit.com/r/MoviesThatFeelLike/comments/1pleflf/movies_that_feel_like_this/nud0hc3/
+
+Confidence Score: 1.0

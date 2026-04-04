@@ -76,7 +76,7 @@ Note: This analysis is based on publicly available Reddit activity.
             # Generate content
             content = template.safe_substitute(
                 username=username,
-                generated_time=datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                generated_time=datetime.now().strftime("%B %d, %Y · %H:%M"),
                 summary=persona.get('analysis_summary', 'No summary available'),
                 demographics=self._format_dict(persona.get('demographics', {})),
                 personality=self._format_dict(persona.get('personality', {})),
