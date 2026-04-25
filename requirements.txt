@@ -1,7 +1,7 @@
 # Web app + persona pipeline (deploy this)
 flask>=3.0.0,<4
 flask-cors>=4.0.0,<6
-gunicorn>=23.0.0
+gunicorn>=25.3.0
 python-dotenv>=1.0.0
 praw>=7.7.0
 pandas>=2.0.0
